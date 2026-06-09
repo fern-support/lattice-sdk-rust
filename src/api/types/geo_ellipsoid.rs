@@ -8,14 +8,20 @@ pub struct GeoEllipsoid {
     /// Defines the distance from the center point to the surface along the forward axis
     #[serde(rename = "forwardAxisM")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub forward_axis_m: Option<f64>,
     /// Defines the distance from the center point to the surface along the side axis
     #[serde(rename = "sideAxisM")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub side_axis_m: Option<f64>,
     /// Defines the distance from the center point to the surface along the up axis
     #[serde(rename = "upAxisM")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub up_axis_m: Option<f64>,
 }
 

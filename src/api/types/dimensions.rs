@@ -5,6 +5,8 @@ pub struct Dimensions {
     /// Length of the entity in meters
     #[serde(rename = "lengthM")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub length_m: Option<f64>,
 }
 

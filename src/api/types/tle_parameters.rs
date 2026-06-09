@@ -23,20 +23,30 @@ pub struct TleParameters {
     pub rev_at_epoch: Option<i64>,
     /// Drag parameter for SGP-4 in units 1 / Earth radii
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub bstar: Option<f64>,
     /// Drag parameter for SGP4-XP in units m^2 / kg
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub bterm: Option<f64>,
     /// First time derivative of mean motion in rev / day^2
     #[serde(rename = "meanMotionDot")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub mean_motion_dot: Option<f64>,
     /// Second time derivative of mean motion in rev / day^3. For use with SGP or PPT3.
     #[serde(rename = "meanMotionDdot")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub mean_motion_ddot: Option<f64>,
     /// Solar radiation pressure coefficient A_gamma / m in m^2 / kg. For use with SGP4-XP.
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub agom: Option<f64>,
 }
 

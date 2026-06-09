@@ -5,7 +5,7 @@ pub use crate::prelude::*;
 pub struct Aliases {
     #[serde(rename = "alternateIds")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub alternate_ids: Option<Vec<AlternateID>>,
+    pub alternate_ids: Option<Vec<AlternateId>>,
     /// The best available version of the entity's display name.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
@@ -20,12 +20,12 @@ impl Aliases {
 #[derive(Clone, PartialEq, Default, Debug)]
 #[non_exhaustive]
 pub struct AliasesBuilder {
-    alternate_ids: Option<Vec<AlternateID>>,
+    alternate_ids: Option<Vec<AlternateId>>,
     name: Option<String>,
 }
 
 impl AliasesBuilder {
-    pub fn alternate_ids(mut self, value: Vec<AlternateID>) -> Self {
+    pub fn alternate_ids(mut self, value: Vec<AlternateId>) -> Self {
         self.alternate_ids = Some(value);
         self
     }

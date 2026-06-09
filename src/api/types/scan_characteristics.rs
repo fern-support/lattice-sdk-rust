@@ -8,6 +8,8 @@ pub struct ScanCharacteristics {
     pub scan_type: Option<ScanCharacteristicsScanType>,
     #[serde(rename = "scanPeriodS")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub scan_period_s: Option<f64>,
 }
 

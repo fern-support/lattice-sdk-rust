@@ -1,34 +1,34 @@
 pub use crate::prelude::*;
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq, Eq, Hash)]
-pub struct EntityIDsSelector {
+pub struct EntityIdsSelector {
     /// Receive tasks as an assignee for one or more of the supplied entity ids.
     #[serde(rename = "entityIds")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub entity_ids: Option<Vec<String>>,
 }
 
-impl EntityIDsSelector {
-    pub fn builder() -> EntityIDsSelectorBuilder {
-        <EntityIDsSelectorBuilder as Default>::default()
+impl EntityIdsSelector {
+    pub fn builder() -> EntityIdsSelectorBuilder {
+        <EntityIdsSelectorBuilder as Default>::default()
     }
 }
 
 #[derive(Clone, PartialEq, Default, Debug)]
 #[non_exhaustive]
-pub struct EntityIDsSelectorBuilder {
+pub struct EntityIdsSelectorBuilder {
     entity_ids: Option<Vec<String>>,
 }
 
-impl EntityIDsSelectorBuilder {
+impl EntityIdsSelectorBuilder {
     pub fn entity_ids(mut self, value: Vec<String>) -> Self {
         self.entity_ids = Some(value);
         self
     }
 
-    /// Consumes the builder and constructs a [`EntityIDsSelector`].
-    pub fn build(self) -> Result<EntityIDsSelector, BuildError> {
-        Ok(EntityIDsSelector {
+    /// Consumes the builder and constructs a [`EntityIdsSelector`].
+    pub fn build(self) -> Result<EntityIdsSelector, BuildError> {
+        Ok(EntityIdsSelector {
             entity_ids: self.entity_ids,
         })
     }

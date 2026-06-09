@@ -12,10 +12,14 @@ pub struct Signal {
     /// Indicates the bandwidth of a signal (Hz).
     #[serde(rename = "bandwidthHz")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub bandwidth_hz: Option<f64>,
     /// Indicates the signal to noise (SNR) of this signal.
     #[serde(rename = "signalToNoiseRatio")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub signal_to_noise_ratio: Option<f64>,
     #[serde(rename = "lineOfBearing")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -29,6 +33,8 @@ pub struct Signal {
     /// length in time of a single pulse
     #[serde(rename = "pulseWidthS")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub pulse_width_s: Option<f64>,
     /// length in time between the start of two pulses
     #[serde(rename = "pulseRepetitionInterval")]

@@ -5,6 +5,8 @@ pub use crate::prelude::*;
 pub struct Bandwidth {
     #[serde(rename = "bandwidthHz")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub bandwidth_hz: Option<f64>,
 }
 

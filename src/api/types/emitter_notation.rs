@@ -8,6 +8,8 @@ pub struct EmitterNotation {
     pub emitter_notation: Option<String>,
     /// confidence as a percentage that the emitter notation in this component is accurate
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub confidence: Option<f64>,
 }
 
