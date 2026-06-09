@@ -6,10 +6,14 @@ pub struct RangeRings {
     /// The minimum range ring distance, specified in meters.
     #[serde(rename = "minDistanceM")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub min_distance_m: Option<f64>,
     /// The maximum range ring distance, specified in meters.
     #[serde(rename = "maxDistanceM")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub max_distance_m: Option<f64>,
     /// The count of range rings.
     #[serde(rename = "ringCount")]

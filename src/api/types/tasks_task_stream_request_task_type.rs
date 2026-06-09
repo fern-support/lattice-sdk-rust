@@ -3,14 +3,14 @@ pub use crate::prelude::*;
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
 #[serde(untagged)]
 pub enum TaskStreamRequestTaskType {
-    TaskStreamRequestTaskTypeTaskTypeURLs(TaskStreamRequestTaskTypeTaskTypeURLs),
+    TaskStreamRequestTaskTypeTaskTypeUrls(TaskStreamRequestTaskTypeTaskTypeUrls),
 
     TaskStreamRequestTaskTypeTaskTypePrefix(TaskStreamRequestTaskTypeTaskTypePrefix),
 }
 
 impl TaskStreamRequestTaskType {
     pub fn is_task_stream_request_task_type_task_type_urls(&self) -> bool {
-        matches!(self, Self::TaskStreamRequestTaskTypeTaskTypeURLs(_))
+        matches!(self, Self::TaskStreamRequestTaskTypeTaskTypeUrls(_))
     }
 
     pub fn is_task_stream_request_task_type_task_type_prefix(&self) -> bool {
@@ -19,18 +19,18 @@ impl TaskStreamRequestTaskType {
 
     pub fn as_task_stream_request_task_type_task_type_urls(
         &self,
-    ) -> Option<&TaskStreamRequestTaskTypeTaskTypeURLs> {
+    ) -> Option<&TaskStreamRequestTaskTypeTaskTypeUrls> {
         match self {
-            Self::TaskStreamRequestTaskTypeTaskTypeURLs(value) => Some(value),
+            Self::TaskStreamRequestTaskTypeTaskTypeUrls(value) => Some(value),
             _ => None,
         }
     }
 
     pub fn into_task_stream_request_task_type_task_type_urls(
         self,
-    ) -> Option<TaskStreamRequestTaskTypeTaskTypeURLs> {
+    ) -> Option<TaskStreamRequestTaskTypeTaskTypeUrls> {
         match self {
-            Self::TaskStreamRequestTaskTypeTaskTypeURLs(value) => Some(value),
+            Self::TaskStreamRequestTaskTypeTaskTypeUrls(value) => Some(value),
             _ => None,
         }
     }
@@ -57,7 +57,7 @@ impl TaskStreamRequestTaskType {
 impl fmt::Display for TaskStreamRequestTaskType {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            Self::TaskStreamRequestTaskTypeTaskTypeURLs(value) => write!(
+            Self::TaskStreamRequestTaskTypeTaskTypeUrls(value) => write!(
                 f,
                 "{}",
                 serde_json::to_string(value).unwrap_or_else(|_| format!("{:?}", value))

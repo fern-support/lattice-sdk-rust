@@ -5,9 +5,13 @@ pub use crate::prelude::*;
 pub struct Measurement {
     /// The value of the measurement.
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub value: Option<f64>,
     /// Estimated one standard deviation in same unit as the value.
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub sigma: Option<f64>,
 }
 

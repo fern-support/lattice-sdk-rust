@@ -1,11 +1,11 @@
 {
   "cliVersion": "4.68.1",
   "generatorName": "fernapi/fern-rust-sdk",
-  "generatorVersion": "0.27.2",
+  "generatorVersion": "0.40.4",
   "generatorConfig": {
     "crateName": "anduril-lattice-sdk",
     "clientClassName": "LatticeClient"
   },
   "originGitCommit": "31906c683b4d6436e96e23b0b90d68d571120ad7",
-  "sdkVersion": "0.0.1854"
+  "sdkVersion": "0.0.1856"
 }

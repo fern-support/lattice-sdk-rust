@@ -92,10 +92,10 @@ impl ObjectsClient {
         options: Option<RequestOptions>,
     ) -> Result<PathMetadata, ApiError> {
         self.http_client
-            .execute_request(
+            .execute_bytes_request(
                 Method::POST,
                 &format!("api/v1/objects/{}", object_path),
-                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
+                Some(request.to_vec()),
                 None,
                 options,
             )

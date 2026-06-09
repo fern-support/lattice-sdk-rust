@@ -2,44 +2,54 @@ use thiserror::Error;
 
 #[derive(Error, Debug)]
 pub enum ApiError {
-    #[error("BadRequestError: Bad request - {{message}}")]
+    #[error("BadRequestError: Bad request - {message}")]
     BadRequestError {
         message: String,
         field: Option<String>,
         details: Option<String>,
     },
-    #[error("UnauthorizedError: Authentication failed - {{message}}")]
+    #[error("UnauthorizedError: Authentication failed - {message}")]
     UnauthorizedError {
         message: String,
         auth_type: Option<String>,
     },
-    #[error("NotFoundError: Resource not found - {{message}}")]
+    #[error("NotFoundError: Resource not found - {message}")]
     NotFoundError {
         message: String,
         resource_id: Option<String>,
         resource_type: Option<String>,
     },
-    #[error("RequestTimeoutError: {{message}}")]
-    RequestTimeoutError { message: String },
-    #[error("TooManyRequestsError: Rate limit exceeded - {{message}}")]
+    #[error("RequestTimeoutError: {message}")]
+    RequestTimeoutError {
+        message: String,
+        error_code: Option<String>,
+    },
+    #[error("TooManyRequestsError: Rate limit exceeded - {message}")]
     TooManyRequestsError {
         message: String,
-        retry_after_seconds: Option<u64>,
-        limit_type: Option<String>,
+        error_code: Option<String>,
     },
-    #[error("InternalServerError: Internal server error - {{message}}")]
+    #[error("InternalServerError: Internal server error - {message}")]
     InternalServerError {
         message: String,
         error_id: Option<String>,
     },
-    #[error("ContentTooLargeError: {{message}}")]
-    ContentTooLargeError { message: String },
-    #[error("InsufficientStorageError: {{message}}")]
-    InsufficientStorageError { message: String },
+    #[error("ContentTooLargeError: {message}")]
+    ContentTooLargeError {
+        message: String,
+        code: Option<String>,
+    },
+    #[error("InsufficientStorageError: {message}")]
+    InsufficientStorageError {
+        message: String,
+        code: Option<String>,
+    },
     #[error("HTTP error {status}: {message}")]
     Http { status: u16, message: String },
     #[error("Network error: {0}")]
     Network(reqwest::Error),
+    #[error("Request executor error: {0}")]
+    Executor(Box<dyn std::error::Error + Send + Sync>),
     #[error("Serialization error: {0}")]
     Serialization(serde_json::Error),
     #[error("Configuration error: {0}")]
@@ -95,7 +105,7 @@ impl ApiError {
                                 .unwrap_or("Unknown error")
                                 .to_string(),
                             auth_type: parsed
-                                .get("auth_type")
+                                .get("authType")
                                 .and_then(|v| v.as_str().map(|s| s.to_string())),
                         };
                     }
@@ -116,10 +126,10 @@ impl ApiError {
                                 .unwrap_or("Unknown error")
                                 .to_string(),
                             resource_id: parsed
-                                .get("resource_id")
+                                .get("resourceId")
                                 .and_then(|v| v.as_str().map(|s| s.to_string())),
                             resource_type: parsed
-                                .get("resource_type")
+                                .get("resourceType")
                                 .and_then(|v| v.as_str().map(|s| s.to_string())),
                         };
                     }
@@ -140,11 +150,15 @@ impl ApiError {
                                 .and_then(|v| v.as_str())
                                 .unwrap_or("Unknown error")
                                 .to_string(),
+                            error_code: parsed
+                                .get("errorCode")
+                                .and_then(|v| v.as_str().map(|s| s.to_string())),
                         };
                     }
                 }
                 return Self::RequestTimeoutError {
                     message: body.unwrap_or("Unknown error").to_string(),
+                    error_code: None,
                 };
             }
             429 => {
@@ -157,19 +171,15 @@ impl ApiError {
                                 .and_then(|v| v.as_str())
                                 .unwrap_or("Unknown error")
                                 .to_string(),
-                            retry_after_seconds: parsed
-                                .get("retry_after_seconds")
-                                .and_then(|v| v.as_u64()),
-                            limit_type: parsed
-                                .get("limit_type")
+                            error_code: parsed
+                                .get("errorCode")
                                 .and_then(|v| v.as_str().map(|s| s.to_string())),
                         };
                     }
                 }
                 return Self::TooManyRequestsError {
                     message: body.unwrap_or("Unknown error").to_string(),
-                    retry_after_seconds: None,
-                    limit_type: None,
+                    error_code: None,
                 };
             }
             500 => {
@@ -183,7 +193,7 @@ impl ApiError {
                                 .unwrap_or("Unknown error")
                                 .to_string(),
                             error_id: parsed
-                                .get("error_id")
+                                .get("errorId")
                                 .and_then(|v| v.as_str().map(|s| s.to_string())),
                         };
                     }
@@ -203,11 +213,15 @@ impl ApiError {
                                 .and_then(|v| v.as_str())
                                 .unwrap_or("Unknown error")
                                 .to_string(),
+                            code: parsed
+                                .get("code")
+                                .and_then(|v| v.as_str().map(|s| s.to_string())),
                         };
                     }
                 }
                 return Self::ContentTooLargeError {
                     message: body.unwrap_or("Unknown error").to_string(),
+                    code: None,
                 };
             }
             507 => {
@@ -220,11 +234,15 @@ impl ApiError {
                                 .and_then(|v| v.as_str())
                                 .unwrap_or("Unknown error")
                                 .to_string(),
+                            code: parsed
+                                .get("code")
+                                .and_then(|v| v.as_str().map(|s| s.to_string())),
                         };
                     }
                 }
                 return Self::InsufficientStorageError {
                     message: body.unwrap_or("Unknown error").to_string(),
+                    code: None,
                 };
             }
             _ => Self::Http {

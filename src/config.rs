@@ -34,9 +34,9 @@ impl Default for ClientConfig {
                     "X-Fern-SDK-Name".to_string(),
                     "anduril_lattice_sdk".to_string(),
                 ),
-                ("X-Fern-SDK-Version".to_string(), "0.0.1854".to_string()),
+                ("X-Fern-SDK-Version".to_string(), "0.0.1856".to_string()),
             ]),
-            user_agent: "API Rust SDK".to_string(),
+            user_agent: "Api Rust SDK".to_string(),
         }
     }
 }

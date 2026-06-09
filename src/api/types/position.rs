@@ -10,31 +10,43 @@ pub struct Position {
     /// WGS84 geodetic latitude in decimal degrees.
     #[serde(rename = "latitudeDegrees")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub latitude_degrees: Option<f64>,
     /// WGS84 longitude in decimal degrees.
     #[serde(rename = "longitudeDegrees")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub longitude_degrees: Option<f64>,
     /// altitude as height above ellipsoid (WGS84) in meters. DoubleValue wrapper is used to distinguish optional from
     /// default 0.
     #[serde(rename = "altitudeHaeMeters")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub altitude_hae_meters: Option<f64>,
     /// Altitude as AGL (Above Ground Level) if the upstream data source has this value set. This value represents the
     /// entity's height above the terrain. This is typically measured with a radar altimeter or by using a terrain tile
     /// set lookup. If the value is not set from the upstream, this value is not set.
     #[serde(rename = "altitudeAglMeters")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub altitude_agl_meters: Option<f64>,
     /// Altitude as ASF (Above Sea Floor) if the upstream data source has this value set. If the value is not set from the upstream, this value is
     /// not set.
     #[serde(rename = "altitudeAsfMeters")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub altitude_asf_meters: Option<f64>,
     /// The depth of the entity from the surface of the water through sensor measurements based on differential pressure
     /// between the interior and exterior of the vessel. If the value is not set from the upstream, this value is not set.
     #[serde(rename = "pressureDepthMeters")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub pressure_depth_meters: Option<f64>,
 }
 

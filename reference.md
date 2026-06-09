@@ -1240,7 +1240,7 @@ async fn main() {
 <dl>
 <dd>
 
-**agent_selector:** `Option<EntityIDsSelector>` — Selector criteria to determine which Agent Tasks the agent receives
+**agent_selector:** `Option<EntityIdsSelector>` — Selector criteria to determine which Agent Tasks the agent receives
     
 </dd>
 </dl>
@@ -1327,7 +1327,7 @@ async fn main() {
 <dl>
 <dd>
 
-**agent_selector:** `Option<EntityIDsSelector>` — The selector criteria to determine which tasks the agent receives.
+**agent_selector:** `Option<EntityIdsSelector>` — The selector criteria to determine which tasks the agent receives.
     
 </dd>
 </dl>
@@ -1644,10 +1644,7 @@ async fn main() {
         ..Default::default()
     };
     let client = LatticeClient::new(config).expect("Failed to build client");
-    client
-        .objects
-        .upload_object(&todo!("Invalid bytes value"), None)
-        .await;
+    client.objects.upload_object(&vec![], None).await;
 }
 ```
 </dd>

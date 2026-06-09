@@ -5,7 +5,7 @@ pub struct AgentStreamRequest {
     /// The selector criteria to determine which tasks the agent receives.
     #[serde(rename = "agentSelector")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub agent_selector: Option<EntityIDsSelector>,
+    pub agent_selector: Option<EntityIdsSelector>,
     /// The time interval, defined in seconds, that determines the frequency at which to send heartbeat events. Defaults to 30s.
     #[serde(rename = "heartbeatIntervalMs")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -21,12 +21,12 @@ impl AgentStreamRequest {
 #[derive(Clone, PartialEq, Default, Debug)]
 #[non_exhaustive]
 pub struct AgentStreamRequestBuilder {
-    agent_selector: Option<EntityIDsSelector>,
+    agent_selector: Option<EntityIdsSelector>,
     heartbeat_interval_ms: Option<i64>,
 }
 
 impl AgentStreamRequestBuilder {
-    pub fn agent_selector(mut self, value: EntityIDsSelector) -> Self {
+    pub fn agent_selector(mut self, value: EntityIdsSelector) -> Self {
         self.agent_selector = Some(value);
         self
     }

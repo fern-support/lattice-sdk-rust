@@ -24,6 +24,8 @@ pub struct Tracked {
     /// detected. The unit is “decibels per square meter,” or dBsm
     #[serde(rename = "radarCrossSection")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub radar_cross_section: Option<f64>,
     /// Timestamp of the latest tracking measurement for this entity.
     #[serde(rename = "lastMeasurementTime")]

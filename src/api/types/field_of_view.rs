@@ -30,13 +30,19 @@ pub struct FieldOfView {
     /// Horizontal field of view in radians.
     #[serde(rename = "horizontalFov")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub horizontal_fov: Option<f64>,
     /// Vertical field of view in radians.
     #[serde(rename = "verticalFov")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub vertical_fov: Option<f64>,
     /// Sensor range in meters.
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub range: Option<f64>,
     /// The mode that this sensor is currently in, used to display for context in the UI. Some sensors can emit multiple
     /// sensor field of views with different modes, for example a radar can simultaneously search broadly and perform

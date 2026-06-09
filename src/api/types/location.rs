@@ -13,6 +13,8 @@ pub struct Location {
     /// Speed is the magnitude of velocity_enu vector [sqrt(e^2 + n^2 + u^2)] when present, measured in m/s.
     #[serde(rename = "speedMps")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub speed_mps: Option<f64>,
     /// The entity's acceleration in meters/s^2.
     #[serde(skip_serializing_if = "Option::is_none")]
